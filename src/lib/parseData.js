@@ -20,7 +20,10 @@ function filterItems(item) {
   let isValid;
   const validKeys = ['url', 'target', 'type', 'text', 'attrs'];
 
-  validKeys.forEach((key) => { isValid = item.hasOwnProperty(key) });
+  validKeys.forEach((key) => {
+    // eslint-disable-next-line no-prototype-builtins
+    isValid = item.hasOwnProperty(key);
+  });
 
   return isValid;
 }
@@ -28,13 +31,15 @@ function filterItems(item) {
 function varifyData(item) {
   if (typeof item.url !== 'string') {
     throw new Error(
-      `The "url" key of all objects must be a string, but ${item.url} which is a ${typeof item.url} was passed`
+      `The "url" key of all objects must be a string, but ${item.url}, ` +
+      `which is a ${typeof item.url} was passed`
     );
   }
   if (!Array.isArray(item.attrs)) {
-    throw new Error(`The "attrs" key of all objects must be an array, but ${item.attrs} was passed`);
+    throw new Error(
+      `The "attrs" key of all objects must be an array, but ${item.attrs} was passed`
+    );
   }
-
 }
 
 // const types = [
